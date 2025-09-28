@@ -4,7 +4,51 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Pour Toi Mon Amour 💕</title>
+    <!-- Import Comfortaa font from Google Fonts -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
     <style>
+      .album-modal {
+        display: none;
+        position: fixed;
+        inset: 0;
+        width: 100vw;
+        min-width: 100vw;
+        height: 100vh;
+        min-height: 100vh;
+        overflow: auto;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        background: rgba(0, 0, 0, 0.85);
+        z-index: 999;
+        align-items: center;
+        justify-content: center;
+        transition: opacity 0.4s ease;
+        opacity: 0;
+      }
+      .album-modal.active {
+        display: flex !important;
+        opacity: 1;
+      }
+      .album-modal .modal-content {
+        background: white;
+        padding: 30px;
+        border-radius: 20px;
+        max-width: 90vw;
+        max-height: 90vh;
+        overflow: auto;
+        position: relative;
+        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+        transform: scale(0.8);
+        transition: transform 0.4s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+      }
+      .album-modal.active .modal-content {
+        transform: scale(1);
+      }
       * {
         margin: 0;
         padding: 0;
@@ -12,8 +56,13 @@
       }
 
       body {
-        font-family: "Inter", -apple-system, BlinkMacSystemFont, sans-serif;
-        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        font-family: "Comfortaa", cursive, sans-serif;
+        background: linear-gradient(
+          135deg,
+          #0f2027 0%,
+          #203a43 50%,
+          #2c5364 100%
+        );
         color: white;
         overflow-x: hidden;
         min-height: 100vh;
@@ -45,18 +94,18 @@
         height: 100%;
         background: radial-gradient(
             circle at 20% 50%,
-            rgba(255, 20, 147, 0.3) 0%,
-            transparent 50%
+            rgba(15, 32, 39, 0.4) 0%,
+            transparent 60%
           ),
           radial-gradient(
             circle at 80% 20%,
-            rgba(138, 43, 226, 0.3) 0%,
-            transparent 50%
+            rgba(44, 83, 100, 0.3) 0%,
+            transparent 60%
           ),
           radial-gradient(
             circle at 40% 80%,
-            rgba(30, 144, 255, 0.3) 0%,
-            transparent 50%
+            rgba(32, 58, 67, 0.3) 0%,
+            transparent 60%
           );
         animation: gradientMove 8s ease-in-out infinite;
       }
@@ -168,8 +217,7 @@
       }
 
       .photo-card:hover {
-        transform: translateY(-20px) scale(1.05);
-        box-shadow: 0 30px 60px rgba(0, 0, 0, 0.4);
+        /* Désactivé, état hover devient état de base */
       }
 
       .photo-card img {
@@ -180,7 +228,7 @@
       }
 
       .photo-card:hover img {
-        transform: scale(1.1);
+        /* Désactivé, état hover devient état de base */
       }
 
       .photo-overlay {
@@ -197,23 +245,23 @@
         display: flex;
         align-items: center;
         justify-content: center;
-        opacity: 0;
+        opacity: 1;
         transition: all 0.5s ease;
       }
 
       .photo-card:hover .photo-overlay {
-        opacity: 1;
+        /* Désactivé, état hover devient état de base */
       }
 
       .overlay-text {
         text-align: center;
         padding: 20px;
-        transform: translateY(30px);
+        transform: translateY(0);
         transition: transform 0.5s ease;
       }
 
       .photo-card:hover .overlay-text {
-        transform: translateY(0);
+        /* Désactivé, état hover devient état de base */
       }
 
       .overlay-title {
@@ -361,7 +409,7 @@
       .heart {
         position: absolute;
         font-size: 20px;
-        color: rgba(255, 107, 157, 0.6);
+        color: #c59e9d;
         animation: floatHeart 8s linear infinite;
       }
 
@@ -444,6 +492,86 @@
           <h1 class="hero-title">Ma vie Mon BABE</h1>
           <p class="hero-subtitle">Pour la femme qui illumine ma vie</p>
         </div>
+        <!-- Modale album photo -->
+        <div
+          id="albumModal"
+          style="
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: rgba(0, 0, 0, 0.8);
+            z-index: 999;
+            align-items: center;
+            justify-content: center;
+          "
+        >
+          <div
+            style="
+              background: white;
+              padding: 30px;
+              border-radius: 20px;
+              max-width: 90vw;
+              max-height: 90vh;
+              overflow: auto;
+              position: relative;
+            "
+          >
+            <button
+              onclick="document.getElementById('albumModal').style.display='none'"
+              style="
+                position: absolute;
+                top: 10px;
+                right: 10px;
+                font-size: 2rem;
+                background: none;
+                border: none;
+                cursor: pointer;
+              "
+            >
+              &times;
+            </button>
+            <h3 style="color: #203a43; text-align: center; margin-bottom: 20px">
+              Album de moments
+            </h3>
+            <div
+              style="
+                display: flex;
+                flex-wrap: wrap;
+                gap: 20px;
+                justify-content: center;
+              "
+            >
+              <img
+                src="WhatsApp Image 2025-05-04 at 00.59.18.jpeg"
+                style="max-width: 300px; border-radius: 15px"
+                alt="Moment 1"
+              />
+              <img
+                src="WhatsApp Image 2025-08-04 at 19.41.49.jpeg"
+                style="max-width: 300px; border-radius: 15px"
+                alt="Moment 2"
+              />
+              <img
+                src="WhatsApp Image 2025-08-04 at 20.23.55.jpeg"
+                style="max-width: 300px; border-radius: 15px"
+                alt="Moment 3"
+              />
+              <img
+                src="WhatsApp Image 2025-08-04 at 20.23.56.jpeg"
+                style="max-width: 300px; border-radius: 15px"
+                alt="Moment 4"
+              />
+              <img
+                src="WhatsApp Image 2025-08-04 at 20.31.05.jpeg"
+                style="max-width: 300px; border-radius: 15px"
+                alt="Moment 5"
+              />
+            </div>
+          </div>
+        </div>
         <div class="scroll-indicator">
           <span>↓</span>
           <span style="opacity: 0.7">Découvre mon amour pour toi</span>
@@ -454,59 +582,259 @@
       <section class="photo-gallery animate-on-scroll">
         <h2 class="section-title">Nos Plus Beaux Moments</h2>
         <div class="gallery-grid">
-          <div class="photo-card">
+          <div class="photo-card" data-album="album1">
             <img
               src="WhatsApp Image 2025-08-04 at 20.31.05.jpeg"
               alt="Notre Rencontre"
             />
             <div class="photo-overlay">
               <div class="overlay-text">
-                <div class="overlay-title">
-                  CHAQUE MOMENT EST SPECIAL AVEC TOI ❤️
-                </div>
+                <div class="overlay-title">LAC ROSE</div>
               </div>
             </div>
           </div>
 
-          <div class="photo-card">
+          <div class="photo-card" data-album="album2">
             <img
               src="WhatsApp Image 2025-08-04 at 19.41.49.jpeg"
               alt="Ton Sourire"
             />
             <div class="photo-overlay">
               <div class="overlay-text">
-                <div class="overlay-title">
-                  JE SOURI BETÊMENT A TES COTES -> C'EST L'AMOUR 😊
-                </div>
+                <div class="overlay-title">ALMAS BISTRO</div>
               </div>
             </div>
           </div>
 
-          <div class="photo-card">
+          <div class="photo-card" data-album="album3">
             <img
               src="WhatsApp Image 2025-08-04 at 20.23.55.jpeg"
               alt="Nos Aventures"
             />
             <div class="photo-overlay">
               <div class="overlay-text">
-                <div class="overlay-title">
-                  NOS AVANTURES -> LES MEILLEURS DE TOUTE MA LIFE 🌍
-                </div>
+                <div class="overlay-title">BILLY'S BURGER</div>
               </div>
             </div>
           </div>
 
-          <div class="photo-card">
+          <div class="photo-card" data-album="album4">
             <img
               src="WhatsApp Image 2025-08-04 at 20.23.56.jpeg"
               alt="Notre Amour"
             />
             <div class="photo-overlay">
               <div class="overlay-text">
-                <div class="overlay-title">Notre Amour 💕</div>
-                <div class="overlay-message">
-                  Fort, éternel et indestructible
-                </div>
+                <div class="overlay-title">CINEMA PATHE</div>
+              </div>
+            </div>
+          </div>
+          <!-- Modales d'albums pour chaque card -->
+          <div id="album1" class="album-modal">
+            <div class="modal-content">
+              <button
+                onclick="closeAlbum('album1')"
+                style="
+                  position: absolute;
+                  top: 10px;
+                  right: 10px;
+                  font-size: 2rem;
+                  background: none;
+                  border: none;
+                  cursor: pointer;
+                "
+              >
+                &times;
+              </button>
+              <h3
+                style="color: #203a43; text-align: center; margin-bottom: 20px"
+              >
+                Lac rose 🩷
+              </h3>
+              <div
+                style="
+                  display: flex;
+                  flex-wrap: wrap;
+                  gap: 20px;
+                  justify-content: center;
+                "
+              >
+                <img
+                  src="WhatsApp Image 2025-08-04 at 20.31.05.jpeg"
+                  style="max-width: 300px; border-radius: 15px"
+                  alt="Moment 1"
+                />
+                <img
+                  src="lacrose.jpeg"
+                  style="max-width: 300px; border-radius: 15px"
+                  alt="Moment 2"
+                />
+                <img
+                  src="WhatsApp Image 2025-08-04 at 20.23.56.jpeg"
+                  style="max-width: 300px; border-radius: 15px"
+                  alt="Moment 3"
+                />
+                <img
+                  src="WhatsApp Image 2025-08-04 at 19.41.49.jpeg"
+                  style="max-width: 300px; border-radius: 15px"
+                  alt="Moment 4"
+                />
+              </div>
+            </div>
+          </div>
+          <div id="album2" class="album-modal">
+            <div class="modal-content">
+              <button
+                onclick="closeAlbum('album2')"
+                style="
+                  position: absolute;
+                  top: 10px;
+                  right: 10px;
+                  font-size: 2rem;
+                  background: none;
+                  border: none;
+                  cursor: pointer;
+                "
+              >
+                &times;
+              </button>
+              <h3
+                style="color: #203a43; text-align: center; margin-bottom: 20px"
+              >
+                ALMAS BISTRO
+              </h3>
+              <div
+                style="
+                  display: flex;
+                  flex-wrap: wrap;
+                  gap: 20px;
+                  justify-content: center;
+                "
+              >
+                <img
+                  src="almas1.jpeg"
+                  style="max-width: 300px; border-radius: 15px"
+                  alt="Sourire 1"
+                />
+                <img
+                  src="almas2.jpeg"
+                  style="max-width: 300px; border-radius: 15px"
+                  alt="Sourire 2"
+                />
+                <img
+                  src="almas3.jpeg"
+                  style="max-width: 300px; border-radius: 15px"
+                  alt="Sourire 3"
+                />
+                <img
+                  src="almas4.jpeg"
+                  style="max-width: 300px; border-radius: 15px"
+                  alt="alams4"
+                />
+              </div>
+            </div>
+          </div>
+          <div id="album3" class="album-modal">
+            <div class="modal-content">
+              <button
+                onclick="closeAlbum('album3')"
+                style="
+                  position: absolute;
+                  top: 10px;
+                  right: 10px;
+                  font-size: 2rem;
+                  background: none;
+                  border: none;
+                  cursor: pointer;
+                "
+              >
+                &times;
+              </button>
+              <h3
+                style="color: #203a43; text-align: center; margin-bottom: 20px"
+              >
+                BILLY'S BURGER
+              </h3>
+              <div
+                style="
+                  display: flex;
+                  flex-wrap: wrap;
+                  gap: 20px;
+                  justify-content: center;
+                "
+              >
+                <img
+                  src="BILLLYS3.jpeg"
+                  style="max-width: 300px; border-radius: 15px"
+                  alt="Aventure 1"
+                />
+                <img
+                  src="BILLYS1.jpeg"
+                  style="max-width: 300px; border-radius: 15px"
+                  alt="Aventure 2"
+                />
+                <img
+                  src="BILLYS2.jpeg"
+                  style="max-width: 300px; border-radius: 15px"
+                  alt="Aventure 3"
+                />
+                <img
+                  src="WhatsApp Image 2025-05-04 at 00.59.18.jpeg"
+                  style="max-width: 300px; border-radius: 15px"
+                  alt="Aventure 4"
+                />
+              </div>
+            </div>
+          </div>
+          <div id="album4" class="album-modal">
+            <div class="modal-content">
+              <button
+                onclick="closeAlbum('album4')"
+                style="
+                  position: absolute;
+                  top: 10px;
+                  right: 10px;
+                  font-size: 2rem;
+                  background: none;
+                  border: none;
+                  cursor: pointer;
+                "
+              >
+                &times;
+              </button>
+              <h3
+                style="color: #203a43; text-align: center; margin-bottom: 20px"
+              >
+                CINEMA PATHE
+              </h3>
+              <div
+                style="
+                  display: flex;
+                  flex-wrap: wrap;
+                  gap: 20px;
+                  justify-content: center;
+                "
+              >
+                <img
+                  src="WhatsApp Image 2025-09-28 at 04.19.12 (1).jpeg"
+                  style="max-width: 300px; border-radius: 15px"
+                  alt="Amour 1"
+                />
+                <img
+                  src="WhatsApp Image 2025-09-28 at 04.19.12.jpeg"
+                  style="max-width: 300px; border-radius: 15px"
+                  alt="Amour 2"
+                />
+                <img
+                  src="WhatsApp Image 2025-09-28 at 04.25.09 (1).jpeg"
+                  style="max-width: 300px; border-radius: 15px"
+                  alt="Amour 3"
+                />
+                <img
+                  src="WhatsApp Image 2025-09-28 at 04.25.09.jpeg"
+                  style="max-width: 300px; border-radius: 15px"
+                  alt="Amour 4"
+                />
               </div>
             </div>
           </div>
@@ -582,7 +910,7 @@
       function createHeart() {
         const heart = document.createElement("div");
         heart.className = "heart";
-        heart.innerHTML = Math.random() > 0.5 ? "💕" : "💖";
+        heart.innerHTML = "♥";
         heart.style.left = Math.random() * 100 + "%";
         heart.style.animationDuration = Math.random() * 4 + 4 + "s";
         heart.style.animationDelay = Math.random() * 2 + "s";
@@ -619,13 +947,31 @@
       // Smooth scroll behavior for the entire page
       document.documentElement.style.scrollBehavior = "smooth";
 
-      // Add click events to photo cards for enhanced interaction
+      // Au clic sur une card, ouvrir la modale correspondante
+      function openAlbum(albumId) {
+        document.querySelectorAll(".album-modal").forEach((modal) => {
+          modal.classList.remove("active");
+          modal.style.display = "none";
+        });
+        const modal = document.getElementById(albumId);
+        modal.style.display = "flex";
+        setTimeout(() => {
+          modal.classList.add("active");
+        }, 10);
+      }
+
+      function closeAlbum(albumId) {
+        const modal = document.getElementById(albumId);
+        modal.classList.remove("active");
+        setTimeout(() => {
+          modal.style.display = "none";
+        }, 400);
+      }
+
       document.querySelectorAll(".photo-card").forEach((card) => {
         card.addEventListener("click", function () {
-          this.style.transform = "translateY(-20px) scale(1.08)";
-          setTimeout(() => {
-            this.style.transform = "";
-          }, 300);
+          var albumId = this.getAttribute("data-album");
+          openAlbum(albumId);
         });
       });
 
